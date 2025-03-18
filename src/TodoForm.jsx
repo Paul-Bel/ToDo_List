@@ -1,24 +1,22 @@
-import {useRef} from "react";
-
 function TodoForm({addTodo}) {
 
-    const newText = useRef()
-    const newTextHandler = () =>{
-        const text= newText.current.value.trim()
+    const handleForm = (event) => {
+        event.preventDefault();
+
+        const text = event.target.title.value.trim()
         if (text) {
             addTodo(text);
-            newText.current.value = "";
+            event.target.reset();
+            event.target.title.focus();
         }
     }
 
     return (
-            <form onSubmit={(e) => {
-                e.preventDefault(); newTextHandler()
-            }}>
-                <label htmlFor="todoTitle">Todo</label>
-                <input id="todoTitle" type="text" ref={newText}/>
-                <button type="submit">"Add Todo"</button>
-            </form>
+        <form onSubmit={(event) => handleForm(event)}>
+            <label htmlFor="todoTitle">Todo</label>
+            <input name="title" id="todoTitle" type="text"/>
+            <button type="submit">Add Todo</button>
+        </form>
     )
 }
 
