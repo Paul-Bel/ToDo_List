@@ -5,12 +5,7 @@ import {useState} from "react";
 
 function App() {
 
-
     const [newTodo, setNewTodo] = useState("")
-
-    const addTodo = (newTodo) => setNewTodo((prev) => {
-        return [...prev, {id: prev.length + 1, title: newTodo}] //when deletion will work, I'll change the principle of assigning the id, for now just added for work.
-    })
 
     return (
         <div>
