@@ -1,7 +1,7 @@
-function TodoListItem({todo}) {
+function TodoListItem({title}) {
 
     return (
-        <li>{todo.title}</li>
+        <li>{title}</li>
     )
 }
 

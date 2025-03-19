@@ -1,11 +1,11 @@
-function TodoForm({addTodo}) {
+function AddTodoForm({onAddTodo}) {
 
     const handleForm = (event) => {
         event.preventDefault();
 
         const text = event.target.title.value.trim()
         if (text) {
-            addTodo(text);
+            onAddTodo(text)
             event.target.reset();
             event.target.title.focus();
         }
@@ -20,4 +20,4 @@ function TodoForm({addTodo}) {
     )
 }
 
-export default TodoForm;
+export default AddTodoForm;
