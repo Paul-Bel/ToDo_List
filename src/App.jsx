@@ -1,14 +1,17 @@
+import {useState} from "react";
 import './App.css'
+
 import TodoList from "./TodoList.jsx";
 import AddTodoForm from "./AddTodoForm.jsx";
-import {useState} from "react";
 
 function App() {
 
     const [todoList, setTodoList] = useState([])
 
     const handleAddTodo = (newTodo) => {
+
         const id = Date.now()
+
         setTodoList([...todoList, {id: id, title: newTodo, isCompleted: false}])
     }
 

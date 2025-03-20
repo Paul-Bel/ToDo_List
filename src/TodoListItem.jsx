@@ -2,7 +2,7 @@ function TodoListItem({todo, onCompleteTodo}) {
 
     return (
         <li>
-            <form onSubmit={e => e.preventDefault()}>
+            <form>
                 <input
                     type="checkbox"
                     checked={todo.isCompleted}
