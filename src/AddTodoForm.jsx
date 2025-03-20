@@ -1,6 +1,6 @@
 function AddTodoForm({onAddTodo}) {
 
-    const handleForm = (event) => {
+    const handleAddTodo = (event) => {
         event.preventDefault();
 
         const text = event.target.title.value.trim()
@@ -12,7 +12,7 @@ function AddTodoForm({onAddTodo}) {
     }
 
     return (
-        <form onSubmit={(event) => handleForm(event)}>
+        <form onSubmit={handleAddTodo}>
             <label htmlFor="todoTitle">Todo</label>
             <input name="title" id="todoTitle" type="text"/>
             <button type="submit">Add Todo</button>
