@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 import {useRef, useState} from "react";
+=======
+import {useState, useRef} from "react";
+import InputWithLabel from "../shared/InputWithLabel.jsx";
+>>>>>>> 3cad0fa (added: title editior)
 
 function AddTodoForm({onAddTodo}) {
 
@@ -12,6 +17,7 @@ function AddTodoForm({onAddTodo}) {
         inputRef.current.focus();
     }
 
+<<<<<<< HEAD
     const handleNewTodo = (event) => setWorkingTodo(event.currentTarget.value)
 
     return (
@@ -27,6 +33,21 @@ function AddTodoForm({onAddTodo}) {
                 type="submit"
                 disabled={!workingTodo.trim()}
             >
+=======
+    const handleInputChange = (event) => setWorkingTodo(event.target.value);
+
+    return (
+        <form onSubmit={handleAddTodo}>
+            <InputWithLabel
+                lelementId={"todoTitle"}
+                label={"Todo"}
+                ref={inputRef}
+                value={workingTodo}
+                onChange={handleInputChange}
+            />
+            <button type="submit"
+                    disabled={!workingTodo.trim()}>
+>>>>>>> 3cad0fa (added: title editior)
                 Add Todo
             </button>
         </form>
