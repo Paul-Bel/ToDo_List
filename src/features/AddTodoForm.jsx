@@ -18,7 +18,7 @@ function AddTodoForm({onAddTodo}) {
     return (
         <form onSubmit={handleAddTodo}>
             <InputWithLabel
-                lelementId={"todoTitle"}
+                elementId={"todoTitle"}
                 label={"Todo"}
                 ref={inputRef}
                 value={workingTodo}

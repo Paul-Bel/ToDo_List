@@ -1,13 +1,13 @@
-function InputWithLabel({lelementId, label, onChange, ref, value}) {
+function InputWithLabel({elementId, label, onChange, ref, value}) {
 
 
     return (
         <>
-            <label htmlFor={lelementId}>{label}</label>
+            <label htmlFor={elementId}>{label}</label>
             <input
                 autoFocus={true}
                 type="text"
-                id={lelementId}
+                id={elementId}
                 ref={ref}
                 onChange={onChange}
                 value={value}
