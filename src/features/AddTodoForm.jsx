@@ -24,8 +24,10 @@ function AddTodoForm({onAddTodo}) {
                 value={workingTodo}
                 onChange={handleInputChange}
             />
-            <button type="submit"
-                    disabled={!workingTodo.trim()}>
+            <button
+                type="submit"
+                disabled={!workingTodo.trim()}
+            >
                 Add Todo
             </button>
         </form>

@@ -1,4 +1,10 @@
-function InputWithLabel({elementId, label, onChange, ref, value}) {
+function InputWithLabel({
+                            elementId,
+                            label,
+                            onChange,
+                            ref,
+                            value
+                        }) {
 
 
     return (

@@ -8,29 +8,23 @@ function TodoListItem({todo, onCompleteTodo, onUpdateTodo}) {
 
     const handleCancel = () => {
         setIsEditing(false)
-        setWorkingTitle(todo.title)};
-
-    const handleEdit = (event) => setWorkingTitle(event.target.value);
+        setWorkingTitle(todo.title)
+    };
 
     const handleUpdate = (event) => {
-        if (!isEditing) {
-            return
-        }
         event.preventDefault();
+
+        if (!isEditing) return
+
         setIsEditing(false);
         onUpdateTodo(todo.id, workingTitle)
     }
 
+    const handleEdit = (event) => setWorkingTitle(event.target.value);
+
     return (
         <li>
-            <form>
-<<<<<<< HEAD
-                <input
-                    type="checkbox"
-                    checked={todo.isCompleted}
-                    onChange={() => onCompleteTodo(todo.id)}/>
-                {todo.title}
-=======
+            <form onSubmit={handleUpdate}>
                 {isEditing ?
                     <>
                         <InputWithLabel
@@ -47,7 +41,6 @@ function TodoListItem({todo, onCompleteTodo, onUpdateTodo}) {
                             onChange={() => onCompleteTodo(todo.id)}/>
                         <span onClick={() => setIsEditing(true)}>{todo.title}</span>
                     </label>}
->>>>>>> 3cad0fa (added: title editior)
             </form>
         </li>
     )
