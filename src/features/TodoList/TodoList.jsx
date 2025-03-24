@@ -9,10 +9,10 @@ function TodoList({todoList, onCompleteTodo, onUpdateTodo}) {
             <ul>
                 {filteredTodoList.map(todo =>
                     <TodoListItem
-                    key={todo.id}
-                    todo={todo}
-                    onCompleteTodo={onCompleteTodo}
-                    onUpdateTodo={onUpdateTodo}/>)}
+                        key={todo.id}
+                        todo={todo}
+                        onCompleteTodo={onCompleteTodo}
+                        onUpdateTodo={onUpdateTodo}/>)}
             </ul>
             :
             <p>Add Todo above to get started</p>
