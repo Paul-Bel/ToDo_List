@@ -24,18 +24,20 @@ function App() {
         ...(payload && {body: JSON.stringify(payload)}),
 
     })
-    const payload = (id, editedTodo, isCompleted) => ({
+    const payload = (id, editedTodo, isCompleted) => {
+        const taskComplete = isCompleted ?? false
+        return ({
             records: [
                 {
                     ...(id && {id}),
                     fields: {
                         ...(editedTodo && {title: editedTodo}),
-                        ...(isCompleted && {isCompleted: isCompleted.toString()}),
+                        isCompleted: taskComplete.toString(),
                     },
                 },
             ],
-        }
-    )
+        })
+    }
 
     useEffect(() => {
 
