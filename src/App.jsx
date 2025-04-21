@@ -10,10 +10,24 @@ function App() {
     const [isSaving, setIsSaving] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
 
+    const [sortField, setSortField] = useState('createdTime')
+    const [sortDirection, setSortDirection] = useState('desc')
+    const [queryString, setQueryString] = useState('')
+
     const [todoList, setTodoList] = useState([])
 
-    const url = `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}`;
+    const baseUrl = `https://api.airtable.com/v0/${import.meta.env.VITE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}`;
+
     const token = `Bearer ${import.meta.env.VITE_PAT}`;
+    const encodeUrl = (sortField, sortDirection, queryString) => {
+        let searchQuery = ''
+        let sortQuery = `sort[0][field]=${sortField}&sort[0][direction]=${sortDirection}`
+        if (queryString) {
+            searchQuery = `&filterByFormula=SEARCH("${queryString}",+title)`;
+        }
+        return encodeURI(`${baseUrl}?${sortQuery}${searchQuery}`)
+    }
+    const url = encodeUrl(sortField, sortDirection, queryString);
 
     const options = (method, content, payload) => ({
         method,
@@ -25,14 +39,13 @@ function App() {
 
     })
     const payload = (id, editedTodo, isCompleted) => {
-        const taskComplete = isCompleted ?? false
         return ({
             records: [
                 {
                     ...(id && {id}),
                     fields: {
                         ...(editedTodo && {title: editedTodo}),
-                        isCompleted: taskComplete.toString(),
+                        isCompleted: isCompleted ?? false,
                     },
                 },
             ],
@@ -55,7 +68,7 @@ function App() {
                         ({
                             id: todo?.id,
                             title: todo.fields?.title,
-                            isCompleted: todo.fields?.isCompleted === "true"
+                            isCompleted: todo.fields?.isCompleted
                         }))
 
                     setTodoList(fetchTodo)
@@ -68,7 +81,7 @@ function App() {
             }
         };
         fetchTodos()
-    }, [])
+    }, [sortField, sortDirection, queryString])
 
     const handleAddTodo = async (newTodo) => {
         try {
@@ -82,7 +95,7 @@ function App() {
                     ({
                         id: todo?.id,
                         title: todo.fields?.title,
-                        isCompleted: todo.fields?.isCompleted === "true"
+                        isCompleted: todo.fields?.isCompleted
                     }))
 
                 setTodoList([...todoList, ...newTodo])
@@ -110,7 +123,7 @@ function App() {
                     ({
                         id: todo?.id,
                         title: todo.fields?.title,
-                        isCompleted: todo.fields?.isCompleted === "true"
+                        isCompleted: todo.fields?.isCompleted ?? false
                     }))
                 const updatedTodos = todoList.map(todo =>
                     todo.id === id ? {...updatedTodo[0]} : todo)
@@ -160,7 +173,14 @@ function App() {
                 onUpdateTodo={updateTodo}
                 isLoading={isLoading}
                 errorMessage={errorMessage}
-                setErrorMessage={setErrorMessage}/>
+                setErrorMessage={setErrorMessage}
+                sortField={sortField}
+                setSortField={setSortField}
+                sortDirection={sortDirection}
+                setSortDirection={setSortDirection}
+                queryString={queryString}
+                setQueryString={setQueryString}
+            />
         </div>
     )
 }
